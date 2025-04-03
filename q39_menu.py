@@ -39,20 +39,23 @@ def take_order():
     return sub_total
 
 
-def calculate_delivery_fee(sub_total):
-    if sub_total < 35:
-        return 10
-    else:
-        return 0
-
-
 def calculate_order_total(sub_total):
-    if sub_total < 35:
-        devilvery_fee = 5
-    else:
-        devilvery_fee = 0
+    delivery_fee = 10 if sub_total < 35 else 0
+    tax = sub_total * 0.043
+    order_total = sub_total + delivery_fee + tax
+
+    return order_total, delivery_fee, tax
+
+
+def show_order_summary(order_total, delivery_fee, tax):
+    print("----Order Summary----")
+    print("Delivery Fee: $", delivery_fee)
+    print("Tax Fee: $", tax)
+    print("Your Total: $", order_total)
+
 
 # Program starts here
 
-
 sub_total = take_order()
+order_total, delivery_fee, tax = calculate_order_total(sub_total)
+total = show_order_summary(order_total, delivery_fee, tax)
