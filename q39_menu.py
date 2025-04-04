@@ -10,7 +10,7 @@ def take_order():
 
     while True:
         q39_menu()
-        choices = input("what would you like to order (1, 2, 3): ")
+        choices = input("What would you like to order (1, 2, 3): ")
 
         if choices == "1":
             amount = int(input("How many Wings would you like to order? "))
@@ -18,8 +18,7 @@ def take_order():
             print("Wings", amount)
 
         elif choices == "2":
-            amount = int(
-                input("How many Burnt End Burgers would you like to order? "))
+            amount = int(input("How many Burnt End Burgers would you like to order? "))
             sub_total += 16.50 * amount
             print("Burnt End Burger(s)", amount)
 
@@ -27,16 +26,17 @@ def take_order():
             amount = int(input("How many Briskets would you like to order? "))
             sub_total += 12.99 * amount
             print("Brisket(s)", amount)
-            break
+
         else:
             print("Invalid, please choose 1, 2, or 3.")
 
-        print("Your total price is", sub_total)
+        print("Your subtotal is: ${round(sub_total, 2)}")
+        
         more_items = input("Would you like to order more? (yes/no): ").lower()
         if more_items == "no":
             break
 
-    return sub_total
+    return round(sub_total, 2)
 
 
 def calculate_order_total(sub_total):
@@ -44,13 +44,13 @@ def calculate_order_total(sub_total):
     tax = sub_total * 0.043
     order_total = sub_total + delivery_fee + tax
 
-    return order_total, delivery_fee, tax
+    return round(order_total, 2), round(delivery_fee, 2), round(tax, 2)
 
 
 def show_order_summary(order_total, delivery_fee, tax):
-    print("----Order Summary----")
-    print("Delivery Fee: $", delivery_fee)
-    print("Tax Fee: $", tax)
+    print("---- Order Summary ----")
+    print("Delivery Fee: $",delivery_fee)
+    print("Tax Fee: $", tax) 
     print("Your Total: $", order_total)
 
 
@@ -58,4 +58,4 @@ def show_order_summary(order_total, delivery_fee, tax):
 
 sub_total = take_order()
 order_total, delivery_fee, tax = calculate_order_total(sub_total)
-total = show_order_summary(order_total, delivery_fee, tax)
+show_order_summary(order_total, delivery_fee, tax)
